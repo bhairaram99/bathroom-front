@@ -20,15 +20,8 @@ const Header = () => {
     {
       id: 'about',
       label: 'About',
-      hasSubmenu: true,
-      submenu: {
-        column1: [
-          { label: 'Philosophy', path: '/about' },
-          { label: 'History', path: '/about/history' },
-          { label: 'Designers', path: '/designers' },
-          { label: 'Sustainability', path: '/about/sustainability' },
-        ],
-      },
+      path: '/about',
+      hasSubmenu: false,
     },
     {
       id: 'brands',
