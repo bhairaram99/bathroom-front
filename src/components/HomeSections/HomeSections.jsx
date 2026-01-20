@@ -196,11 +196,11 @@ export const NewsSection = () => {
   const news = [
     {
       id: 1,
-      title: 'The merger: Boffi, De Padova, ADL',
+      title: 'The merger: Signature, Woodera, Versatile',
       excerpt:
-        'Boffi, De Padova and ADL announce their merger into a single company which will take the name of Boffi|DePadova.',
+        'Signature, Woodera and Versatile announce their merger into a single company which will take the name of Boffi|DePadova.',
       image: '/images/news/merger.jpg',
-      link: '/news/merger-boffi-depadova-adl',
+      
     },
     {
       id: 2,
@@ -275,23 +275,21 @@ export const BoffiDePadovaSection = () => {
   const brands = [
     {
       id: 1,
-      name: 'Boffi',
-      image: '/images/brands/boffi.jpg',
+      name: 'Signature',
+      image: '/images/store/signature.jpg',
       link: '/about',
       external: false,
     },
     {
       id: 2,
-      name: 'De Padova',
-      image: '/images/brands/depadova.jpg',
-      link: 'https://www.depadova.com',
+      name: 'Woodera',
+      image: '/images/store/woodera.jpg',
       external: true,
     },
-    {
+    { 
       id: 3,
-      name: 'ADL',
-      image: '/images/brands/adl.jpg',
-      link: 'https://www.adl.it',
+      name: 'Versatile',
+      image: '/images/store/versatile.jpg',
       external: true,
     },
   ];
@@ -299,7 +297,7 @@ export const BoffiDePadovaSection = () => {
   return (
     <section className="section brands-section">
       <div className="section__container">
-        <h2 className="section__title">Boffi|DePadova</h2>
+        <h2 className="section__title">Brands</h2>
         
         <div className="brands-grid">
           {brands.map((brand) =>

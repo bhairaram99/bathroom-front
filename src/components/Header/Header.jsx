@@ -31,8 +31,8 @@ const Header = () => {
       submenu: {
         column1: [
           { label: 'Signature', path: '/about' },
-          { label: 'De Padova', path: 'https://www.depadova.com', external: true },
-          { label: 'ADL', path: 'https://www.adl.it', external: true },
+          { label: 'Woodera', external: true },
+          { label: 'Versatile', path: '', external: true },
         ],
       },
     },
