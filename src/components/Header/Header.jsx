@@ -12,6 +12,12 @@ const Header = () => {
 
   const mainNavItems = [
     {
+      id: 'home',
+      label: 'Home',
+      path: '/',
+      hasSubmenu: false,
+    },
+    {
       id: 'collections',
       label: 'Collections',
       hasSubmenu: false,
@@ -128,19 +134,7 @@ const Header = () => {
             </nav>
 
             {/* Search Bar */}
-            <div className="search-container">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="search-input"
-              />
-              <button className="search-button" aria-label="Search">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <path d="m21 21-4.35-4.35"></path>
-                </svg>
-              </button>
-            </div>
+            
           </div>
 
           <div className="header__right">
@@ -170,6 +164,11 @@ const Header = () => {
                 ))}
               </div>
             </div>
+
+            {/* Get a Quote Button */}
+            <Link to="/quote" className="quote-button">
+              Get a Quote
+            </Link>
           </div>
         </div>
 
@@ -257,19 +256,9 @@ const Header = () => {
             </Link>
           </div>
 
-          <div className="search-container">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="search-input"
-            />
-            <button className="search-button" aria-label="Search">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.35-4.35"></path>
-              </svg>
-            </button>
-          </div>
+          <Link to="/quote" className="quote-button">
+            Get a Quote
+          </Link>
         </div>
 
         {/* Mobile Menu */}

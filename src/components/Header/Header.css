@@ -235,6 +235,33 @@
   background-color: var(--color-background-secondary);
 }
 
+/* Get a Quote Button */
+.quote-button {
+  display: inline-block;
+  margin-left: 20px;
+  padding: 10px 20px;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background-color: #e30613;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.quote-button:hover {
+  background-color: #c00510;
+  color: white;
+}
+
+.quote-button:active {
+  transform: scale(0.98);
+}
+
 /* Submenu */
 .header__submenu {
   position: fixed;
@@ -451,5 +478,12 @@
     padding: 10px 0 10px 15px;
     font-size: 13px;
     color: var(--color-text-secondary);
+  }
+
+  /* Quote button on mobile */
+  .quote-button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    font-size: 12px;
   }
 }
