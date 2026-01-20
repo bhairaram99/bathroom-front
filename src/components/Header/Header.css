@@ -12,6 +12,10 @@
   box-shadow: var(--shadow-header);
 }
 
+.header {
+  overflow: visible;
+}
+
 .header__container {
   display: flex;
   align-items: center;
@@ -27,11 +31,18 @@
 
 .header__logo {
   padding-top: 0px;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
-.header__logo img {
-  height: 90px;
+/* Larger logo on desktop while header stays compact */
+.header--desktop .header__logo img {
+  max-height: 140px; /* increased slightly */
   width: auto;
+  display: block;
+  margin: 0; /* remove manual positioning */
 }
 
 .header__logo a {
