@@ -68,12 +68,12 @@ const Footer = () => {
         </nav>
 
         {/* Copyright & Report Wrongdoings */}
-        <div className="footer__bottom">
+        {/* <div className="footer__bottom">
           <p className="footer__copyright">© {new Date().getFullYear()} Signature Bath & Kitchens Ltd. All rights reserved.</p>
           <div className="footer__bottom-links">
             <a href="https://boffi.whistlelink.com/" target="_blank" rel="noopener noreferrer">Report Wrongdoings</a>
           </div>
-        </div>
+        </div> */}
       </div>
     </footer>
   );
