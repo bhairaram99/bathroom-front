@@ -7,7 +7,7 @@ import {
   CataloguesSection,
   NewsSection,
   PhilosophySection,
-  BoffiDePadovaSection,
+  BrandsSection,
 } from '../../components/HomeSections';
 import './Home.css';
 
@@ -24,7 +24,7 @@ const Home = () => {
         <CataloguesSection />
         <NewsSection />
         <PhilosophySection />
-        <BoffiDePadovaSection />
+        <BrandsSection />
       </main>
     </div>
   );

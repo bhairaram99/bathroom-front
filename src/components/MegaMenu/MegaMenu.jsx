@@ -11,8 +11,20 @@ const MegaMenu = ({ isOpen, onClose }) => {
     onClose();
   };
 
+  const handleMouseEnter = () => {
+    // Keep menu open when hovering over it
+  };
+
+  const handleMouseLeave = () => {
+    onClose();
+  };
+
   return (
-    <div className={`mega-menu ${isOpen ? 'mega-menu--open' : ''}`}>
+    <div 
+      className={`mega-menu ${isOpen ? 'mega-menu--open' : ''}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="mega-menu__overlay" onClick={onClose}></div>
       <div className="mega-menu__content">
         <div className="mega-menu__container">

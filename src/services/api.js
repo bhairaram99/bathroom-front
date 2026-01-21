@@ -87,6 +87,25 @@ class ApiService {
       throw error;
     }
   }
+
+  // ==================== Settings ====================
+  
+  // Get public website settings
+  async getSettings() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/settings`);
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to fetch settings');
+      }
+      
+      return data;
+    } catch (error) {
+      console.error('Error fetching settings:', error);
+      throw error;
+    }
+  }
 }
 
 export const api = new ApiService();

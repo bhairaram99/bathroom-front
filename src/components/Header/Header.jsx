@@ -1,13 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import MegaMenu from '../MegaMenu/MegaMenu';
 import './Header.css';
 
 const Header = () => {
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMobileSubmenu, setActiveMobileSubmenu] = useState(null);
-  const [collectionsMenuOpen, setCollectionsMenuOpen] = useState(false);
   const location = useLocation();
 
   const mainNavItems = [
@@ -20,8 +18,14 @@ const Header = () => {
     {
       id: 'collections',
       label: 'Collections',
-      hasSubmenu: false,
-      isMegaMenu: true,
+      hasSubmenu: true,
+      submenu: {
+        column1: [
+          { label: 'Kitchens', path: '/collections/kitchens' },
+          { label: 'Bathrooms', path: '/collections/bathrooms' },
+          { label: 'Extra Collection', path: '/collections/extra-collection' },
+        ],
+      },
     },
     {
       id: 'about',
@@ -111,17 +115,7 @@ const Header = () => {
                     onMouseEnter={() => item.hasSubmenu && handleMouseEnter(item.id)}
                     onMouseLeave={handleMouseLeave}
                   >
-                    {item.isMegaMenu ? (
-                      <a 
-                        href="#" 
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setCollectionsMenuOpen(true);
-                        }}
-                      >
-                        {item.label}
-                      </a>
-                    ) : item.path ? (
+                    {item.path ? (
                       <Link to={item.path}>{item.label}</Link>
                     ) : (
                       <a href="#" onClick={(e) => e.preventDefault()}>
@@ -325,12 +319,6 @@ const Header = () => {
           setMobileMenuOpen(false);
         }}
       ></div>
-
-      {/* Collections Mega Menu */}
-      <MegaMenu 
-        isOpen={collectionsMenuOpen} 
-        onClose={() => setCollectionsMenuOpen(false)} 
-      />
     </>
   );
 };

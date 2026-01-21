@@ -1,10 +1,33 @@
+import { useState, useEffect } from 'react';
+import api from '../../services/api';
 import './WhatsAppButton.css';
 
 const WhatsAppButton = () => {
-  // Replace with your actual WhatsApp number (with country code, no + or spaces)
-  // Example: 447912345678 for UK number +44 7912 345678
-  const phoneNumber = '447912345678'; // Update this with client's number
-  const message = 'Hello! I would like to inquire about your services.'; // Default message
+  const [phoneNumber, setPhoneNumber] = useState('447912345678'); // Default fallback
+  const message = 'Hello! I would like to inquire about your services.';
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const response = await api.getSettings();
+        if (response.data?.settings?.whatsappNumber) {
+          // Remove all non-digit characters except + at the beginning
+          let cleanNumber = response.data.settings.whatsappNumber.trim();
+          // Remove spaces, dashes, parentheses, and any other formatting
+          cleanNumber = cleanNumber.replace(/[\s()\-]/g, '');
+          // Remove the + sign (WhatsApp API doesn't need it in the URL)
+          cleanNumber = cleanNumber.replace(/^\+/, '');
+          console.log('WhatsApp number cleaned:', cleanNumber);
+          setPhoneNumber(cleanNumber);
+        }
+      } catch (error) {
+        console.error('Error fetching WhatsApp settings:', error);
+        // Continue using default number on error
+      }
+    };
+
+    fetchSettings();
+  }, []);
   
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 

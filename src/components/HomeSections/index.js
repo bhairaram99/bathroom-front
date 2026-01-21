@@ -5,5 +5,5 @@ export {
   CataloguesSection,
   NewsSection,
   PhilosophySection,
-  BoffiDePadovaSection,
+  BrandsSection,
 } from './HomeSections';

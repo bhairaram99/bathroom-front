@@ -148,7 +148,7 @@ export const CataloguesSection = () => {
       id: 1,
       title: 'New Collections – The Novelties',
       image: '/images/catalogues/new-collections.jpg',
-      downloadUrl: '/catalogues/boffi-new-collections-2025.pdf',
+      downloadUrl: '/catalogues/signature-new-collections-2025.pdf',
     },
     {
       id: 2,
@@ -270,8 +270,8 @@ export const PhilosophySection = () => {
   );
 };
 
-// Boffi DePadova Section (Brands)
-export const BoffiDePadovaSection = () => {
+// Signature Brands Section
+export const BrandsSection = () => {
   const brands = [
     {
       id: 1,
