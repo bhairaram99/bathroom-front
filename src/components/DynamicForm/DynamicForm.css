@@ -1,0 +1,271 @@
+.dynamic-form {
+  width: 100%;
+}
+
+.dynamic-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.dynamic-form__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.dynamic-form__field--full {
+  grid-column: 1 / -1;
+}
+
+.dynamic-form__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+  margin-bottom: 0.5rem;
+}
+
+.dynamic-form__required {
+  color: #dc2626;
+}
+
+.dynamic-form__input,
+.dynamic-form__select,
+.dynamic-form__textarea {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color, #d1d5db);
+  background-color: var(--input-bg, #ffffff);
+  color: var(--text-primary, #1a1a1a);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+
+.dynamic-form__input:focus,
+.dynamic-form__select:focus,
+.dynamic-form__textarea:focus {
+  outline: none;
+  border-color: var(--primary-color, #b8977e);
+  box-shadow: 0 0 0 3px rgba(184, 151, 126, 0.1);
+}
+
+.dynamic-form__input::placeholder,
+.dynamic-form__textarea::placeholder {
+  color: var(--text-muted, #9ca3af);
+}
+
+.dynamic-form__select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.dynamic-form__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.dynamic-form__error {
+  font-size: 0.75rem;
+  color: #dc2626;
+  margin-top: 0.25rem;
+}
+
+.dynamic-form__field--error .dynamic-form__input,
+.dynamic-form__field--error .dynamic-form__select,
+.dynamic-form__field--error .dynamic-form__textarea {
+  border-color: #dc2626;
+}
+
+/* Checkbox */
+.dynamic-form__checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.dynamic-form__checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dynamic-form__checkbox-box {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid var(--border-color, #d1d5db);
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.dynamic-form__checkbox:checked + .dynamic-form__checkbox-box {
+  background-color: var(--primary-color, #b8977e);
+  border-color: var(--primary-color, #b8977e);
+}
+
+.dynamic-form__checkbox:checked + .dynamic-form__checkbox-box::after {
+  content: '✓';
+  color: #ffffff;
+  font-size: 0.75rem;
+}
+
+.dynamic-form__checkbox-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #4b5563);
+  line-height: 1.5;
+}
+
+.dynamic-form__checkbox-text a {
+  color: var(--primary-color, #b8977e);
+  text-decoration: underline;
+}
+
+/* Radio */
+.dynamic-form__radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.dynamic-form__radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.dynamic-form__radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dynamic-form__radio-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color, #d1d5db);
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.dynamic-form__radio:checked + .dynamic-form__radio-box {
+  border-color: var(--primary-color, #b8977e);
+}
+
+.dynamic-form__radio:checked + .dynamic-form__radio-box::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--primary-color, #b8977e);
+}
+
+.dynamic-form__radio-text {
+  font-size: 0.875rem;
+  color: var(--text-primary, #1a1a1a);
+}
+
+/* Submit Button */
+.dynamic-form__submit {
+  margin-top: 2rem;
+}
+
+.dynamic-form__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 3rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background-color: var(--primary-color, #1a1a1a);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dynamic-form__button:hover:not(:disabled) {
+  background-color: var(--primary-hover, #333333);
+  transform: translateY(-2px);
+}
+
+.dynamic-form__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Messages */
+.dynamic-form__success {
+  background-color: #dcfce7;
+  border: 1px solid #86efac;
+  color: #166534;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.dynamic-form__submit-error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+/* Loading */
+.dynamic-form__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: var(--text-muted, #9ca3af);
+}
+
+.dynamic-form__spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color, #e5e7eb);
+  border-top-color: var(--primary-color, #b8977e);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dynamic-form__empty {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted, #6b7280);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dynamic-form__grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dynamic-form__button {
+    width: 100%;
+  }
+}

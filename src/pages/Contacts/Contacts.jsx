@@ -1,64 +1,66 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import DynamicForm from '../../components/DynamicForm';
+import api from '../../services/api';
 import './Contacts.css';
 
 const Contacts = () => {
-  const [formData, setFormData] = useState({
-    requestType: '',
-    firstName: '',
-    lastName: '',
-    phone: '',
-    email: '',
-    country: '',
-    city: '',
-    postalCode: '',
-    message: '',
-    consent: false,
+  const [fields, setFields] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [formSettings, setFormSettings] = useState({
+    submitButtonText: 'Send Message',
+    successMessage: 'Thank you for contacting us. We will respond to your inquiry shortly.',
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // Fetch form configuration from backend
+  useEffect(() => {
+    const fetchFormConfig = async () => {
+      try {
+        setLoading(true);
+        const response = await api.getContactFormConfig();
+        
+        if (response.status === 'success' && response.data) {
+          setFields(response.data.fields || []);
+          if (response.data.settings) {
+            setFormSettings(prev => ({
+              ...prev,
+              ...response.data.settings,
+            }));
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching contact form config:', error);
+        // Use fallback fields if API fails
+        setFields(getFallbackFields());
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-  };
+    fetchFormConfig();
+  }, []);
 
-  const isFormValid = () => {
-    return (
-      formData.requestType &&
-      formData.firstName &&
-      formData.lastName &&
-      formData.phone &&
-      formData.email &&
-      formData.country &&
-      formData.city &&
-      formData.message &&
-      formData.consent
-    );
-  };
+  // Fallback fields in case API is not available
+  const getFallbackFields = () => [
+    { key: 'fullName', label: 'Full Name', type: 'text', required: true, placeholder: 'Enter your full name', order: 1 },
+    { key: 'email', label: 'Email Address', type: 'email', required: true, placeholder: 'your@email.com', order: 2 },
+    { key: 'phone', label: 'Phone Number', type: 'tel', required: false, placeholder: '+44 (0) 123 456 7890', order: 3 },
+    { key: 'subject', label: 'Subject', type: 'select', required: true, placeholder: 'Select a subject', options: ['General Inquiry', 'Product Information', 'Order Status', 'Technical Support', 'Feedback', 'Other'], order: 4 },
+    { key: 'message', label: 'Message', type: 'textarea', required: true, placeholder: 'Enter your message...', order: 5 },
+  ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (isFormValid()) {
-      console.log('Form submitted:', formData);
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          requestType: '',
-          firstName: '',
-          lastName: '',
-          phone: '',
-          email: '',
-          country: '',
-          city: '',
-          postalCode: '',
-          message: '',
-          consent: false,
-        });
-      }, 3000);
+  // Handle form submission
+  const handleSubmit = async (formData) => {
+    try {
+      const response = await api.submitContactForm(formData);
+      
+      if (response.status === 'success') {
+        return response;
+      } else {
+        throw new Error(response.message || 'Failed to submit form');
+      }
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      throw error;
     }
   };
 
@@ -119,174 +121,16 @@ const Contacts = () => {
       {/* Contact Form Section */}
       <section className="contacts-form-section">
         <div className="contacts-form-section__container">
-          <h2 className="contacts-form-section__title">CONTACTS</h2>
+          <h2 className="contacts-form-section__title">CONTACT US</h2>
 
-          {isSubmitted && (
-            <div className="form-success">
-              Thank you for contacting us. We will respond to your inquiry shortly.
-            </div>
-          )}
-
-          <form className="contacts-form" onSubmit={handleSubmit}>
-            <div className="form-grid">
-              {/* Request Type */}
-              <div className="form-field form-field--full">
-                <select
-                  name="requestType"
-                  value={formData.requestType}
-                  onChange={handleInputChange}
-                  required
-                  className={formData.requestType ? 'has-value' : ''}
-                >
-                  <option value="">Request type *</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="product">Product Information</option>
-                  <option value="project">Project Consultation</option>
-                  <option value="showroom">Showroom Visit</option>
-                  <option value="press">Press Office</option>
-                  <option value="careers">Careers</option>
-                </select>
-              </div>
-
-              {/* First Name */}
-              <div className="form-field">
-                <input
-                  type="text"
-                  name="firstName"
-                  placeholder="First name *"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              {/* Last Name */}
-              <div className="form-field">
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Last name *"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              {/* Phone */}
-              <div className="form-field">
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone *"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              {/* Email */}
-              <div className="form-field">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email *"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              {/* Country */}
-              <div className="form-field">
-                <select
-                  name="country"
-                  value={formData.country}
-                  onChange={handleInputChange}
-                  required
-                  className={formData.country ? 'has-value' : ''}
-                >
-                  <option value="">Country *</option>
-                  <option value="UK">United Kingdom</option>
-                  <option value="US">United States</option>
-                  <option value="FR">France</option>
-                  <option value="IT">Italy</option>
-                  <option value="DE">Germany</option>
-                  <option value="ES">Spain</option>
-                  <option value="CH">Switzerland</option>
-                  <option value="AE">United Arab Emirates</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              {/* City */}
-              <div className="form-field">
-                <input
-                  type="text"
-                  name="city"
-                  placeholder="City *"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              {/* Postal Code */}
-              <div className="form-field">
-                <input
-                  type="text"
-                  name="postalCode"
-                  placeholder="Postal code"
-                  value={formData.postalCode}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              {/* Message */}
-              <div className="form-field form-field--full">
-                <textarea
-                  name="message"
-                  placeholder="Message *"
-                  rows="6"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                ></textarea>
-              </div>
-            </div>
-
-            {/* GDPR Consent */}
-            <div className="form-consent">
-              <label className="consent-checkbox">
-                <input
-                  type="checkbox"
-                  name="consent"
-                  checked={formData.consent}
-                  onChange={handleInputChange}
-                  required
-                />
-                <span className="consent-checkbox__box"></span>
-                <span className="consent-checkbox__text">
-                  I have read and accept the{' '}
-                  <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
-                    Privacy Policy
-                  </a>{' '}
-                  and consent to the processing of my personal data for the purposes 
-                  indicated therein. *
-                </span>
-              </label>
-            </div>
-
-            {/* Submit Button */}
-            <div className="form-submit">
-              <button 
-                type="submit" 
-                className="submit-button"
-                disabled={!isFormValid()}
-              >
-                SEND
-              </button>
-            </div>
-          </form>
+          <DynamicForm
+            fields={fields}
+            onSubmit={handleSubmit}
+            loading={loading}
+            submitButtonText={formSettings.submitButtonText}
+            successMessage={formSettings.successMessage}
+            className="contacts-form"
+          />
         </div>
       </section>
     </div>

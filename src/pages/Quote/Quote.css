@@ -181,3 +181,99 @@
     font-size: 26px;
   }
 }
+
+/* ========================================
+   NEW QUOTE PAGE LAYOUT
+   ======================================== */
+
+.quote-page__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.quote-page__title {
+  font-family: var(--font-primary);
+  font-size: 42px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+
+.quote-page__subtitle {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  color: #666;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.quote-page__form-wrapper {
+  background-color: white;
+  border-radius: 8px;
+  padding: 50px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 40px;
+}
+
+.quote-page__info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.quote-page__info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.quote-page__info-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.quote-page__info-content h3 {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 5px;
+}
+
+.quote-page__info-content p {
+  font-family: var(--font-primary);
+  font-size: 13px;
+  color: #666;
+}
+
+.quote-page__info-content a {
+  color: #e30613;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.quote-page__info-content a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .quote-page__title {
+    font-size: 28px;
+  }
+
+  .quote-page__form-wrapper {
+    padding: 30px 20px;
+    border-radius: 0;
+  }
+
+  .quote-page__info {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
